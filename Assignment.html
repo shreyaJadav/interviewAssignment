@@ -1,0 +1,95 @@
+<html>
+<div id="reqs">
+  <h2 align="center"> PHONE DIRECTORY </h2>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+.addButton{
+	background-color:MediumSeaGreen;
+}
+.removeButton{
+	background-color:red;
+}
+</style>
+<script>
+	var reqs_id = 0;
+	function removeElement(ev) {
+		var button = ev.target;
+	        var parent = ev.target.parentNode;
+		var name = document.getElementById("name");
+		name.remove();
+		var phone = document.getElementById("phone");
+		phone.remove();	
+        	parent.remove();
+	}
+	function inputchange(ipch){
+		var x=ipch.target.value;
+		document.getElementById("name").innerHTML = "Name:" + x;	
+	}
+	function phonenchange(pnch){
+		var x=pnch.target.value;
+		document.getElementById("phone").innerHTML = "Phone:" + x;	
+	}
+	function add() {
+		reqs_id++; // increment reqs_id to get a unique ID for the new element
+
+		//create textbox
+		var div = document.createElement('div');
+		div.setAttribute('id', 'reqs' + reqs_id);
+    		var name=document.createElement('label');
+    		name.innerHTML="Name:"
+    		var input = document.createElement('input');
+    		input.type = "text";
+    		input.setAttribute("class", "w3-input w3-border");
+		input.oninput=function(ev){
+			inputchange(ev)
+		};
+		
+		//input.setAttribute('id', 'reqs' + reqs_id);
+   		//input.setAttribute('value', '');
+    		var reqs = document.getElementById("reqs");
+    		var num=document.createElement('label');
+   		num.innerHTML="Number:";
+    		var br=document.createElement("br");
+    		var br1=document.createElement("br");
+		var br2=document.createElement("br");
+    		var number = document.createElement('input');
+    		number.type = "number";
+    		number.setAttribute("class", "w3-input w3-border");
+	        number.oninput=function(ev){
+		phonenchange(ev)
+		};
+    		//number.setAttribute('id', 'reqs' + reqs_id);
+    		//number.setAttribute('value', reqs_id);
+		var reqs = document.getElementById("reqs");
+    		//create remove button
+    		var remove = document.createElement('button');
+    		remove.classList.add('removeButton');
+    		remove.onclick = function(ev) {
+	 	removeElement(ev)
+   		};
+    		remove.setAttribute("type", "button");
+    		remove.innerHTML = "DELETE" ;
+    		//append elements
+    		reqs.insertBefore(name,document.getElementById("reqs"+reqs_id));
+    		reqs.appendChild(div);
+    		var reqs = document.getElementById("reqs"+reqs_id);
+		reqs.appendChild(name);
+    		reqs.appendChild(input);
+    		reqs.appendChild(br);
+		reqs.appendChild(br2);
+    		reqs.appendChild(num);
+    		reqs.appendChild(number);
+    		reqs.appendChild(remove);
+    		reqs.appendChild(br1);
+  	}
+
+</script>
+
+<button type="button" value="Add" class="addButton" onclick="javascript:add();"> Add</button>
+<p>Subscriber to be added:</p>
+<p id="name">
+</p>
+<p id="phone">
+</p>
+</html>
